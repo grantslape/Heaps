@@ -30,21 +30,23 @@ void displayArray(int* myArray, int size);
 
 void displayTree(int * myTree, int size);
 /*
-	Precondition:
-	Postcondition:
+	Precondition: myTree is initialized, complete, and size is greater than -1
+	Postcondition: myTree is outputted to screen in an easy to read, tree format.
 */
 
 void displayOneLevel(int * myTree, int numRows, int level, int beginIndex,
 		                 int endIndex);
 /*
-	Precondition:
-	Postcondition:
+  This function is only called instead of displayTree, and so displayTree is 
+  successfully executed, then displayOneLevel will successfully execute.
+	Precondition: displayTree() is executed properly.
+	Postcondition: The specified line is printed from the tree.
 */
 
-void heapsort(int*, int size);
+void heapsort(int* myHeap, int size);
 /*
 	Precondition:
-	Postcondition:
+	Postcondition: Ascending order as in textbook
 */
 
 int main() {
@@ -71,7 +73,7 @@ int main() {
 			}
 	    else if (ch == 's') {
 	    	cout << "Sorting!\n";
-        //heapsort();
+        heapsort(myHeap, size);
 			}
       displayTree(myHeap, size);
       displayArray(myHeap, size);
@@ -105,6 +107,20 @@ void percolateDown(int * semiHeap, int root, int size) {
 void heapify(int * myArray, int size) {
 	for(int r = (size/2); r > 0; r--) {
 		percolateDown(myArray, r, size);
+	}
+}
+
+void heapsort(int* myHeap, int size) {
+	const int ROOT = 1; //The root is stored at 1;
+	int temp;
+	heapify(myHeap, size); //convert binary tree to heap.
+	for(int i = size; i >= 2; i--) {
+		//root-leaf exchange follows
+		temp = myHeap[1];
+		myHeap[1] = myHeap[i];
+		myHeap[i] = temp;
+		//Prune leaf and percolate down
+		percolateDown(myHeap, ROOT, i-1);
 	}
 }
 
