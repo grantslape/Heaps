@@ -8,28 +8,37 @@ using namespace std;
 
 void heapify(int * myArray, int size);
 /*
+	!!INDEXES START AT 1 NOT 0!!
+
 	Applies percolateDown as needed to transform complete binary tree to a heap.
 	Precondition: myArray[r] through myArray[size] stores a complete binary tree.
+								size > -1
 	Postcondition: The binary tree has been converted to a heap.  Since the array
 	is dynamically allocated, no return type is needed.
 */
 
 void percolateDown(int * semiHeap, int root, int size);
 /*
+	!!INDEXES START AT 1 NOT 0!!
+
 	Precondition: semiHeap[r]-[size] stores a semiHeap and only semiHeap[r] fails
-	heap order principle.
+	heap order principle. size > -1
 	Postcondition: semiHeap is converted into a heap.
 */
 
 void displayArray(int* myArray, int size);
 /* 
+  !!INDEXES START AT 1 NOT 0!!
+  
 	Displays the contents of the array in a horizontal fashion.
-	Precondition: None
+	Precondition: size > -1
 	Postcondtion: the contents of the array are outputted to cout
 */
 
 void displayTree(int * myTree, int size);
 /*
+	!!INDEXES START AT 1 NOT 0!!
+
 	Precondition: myTree is initialized, complete, and size is greater than -1
 	Postcondition: myTree is outputted to screen in an easy to read, tree format.
 */
@@ -37,6 +46,7 @@ void displayTree(int * myTree, int size);
 void displayOneLevel(int * myTree, int numRows, int level, int beginIndex,
 		                 int endIndex);
 /*
+
   This function is only called instead of displayTree, and so displayTree is 
   successfully executed, then displayOneLevel will successfully execute.
 	Precondition: displayTree() is executed properly.
@@ -45,8 +55,11 @@ void displayOneLevel(int * myTree, int numRows, int level, int beginIndex,
 
 void heapsort(int* myHeap, int size);
 /*
-	Precondition:
-	Postcondition: Ascending order as in textbook
+	!!INDEXES START AT 1 NOT 0!!
+	
+	Precondition: myHeap contains a complete binary tree and size > -1.
+	Postcondition:  my Heap is sorted in Ascending order from [1] -> [size]
+									indices.
 */
 
 int main() {
@@ -59,7 +72,7 @@ int main() {
 		cin >> size;
 		assert(size >= -1); //Assert that number of elements is greater than 1
 		if (size > -1) { //Check for 0 values
-			myHeap = new int[size+1]; //Allocate new array
+			myHeap = new(nothrow) int[size+1]; //Allocate new array
 			for(int i = 1; i < size+1; i++) {
 				myHeap[i] = rand() % 1000;
 			}
